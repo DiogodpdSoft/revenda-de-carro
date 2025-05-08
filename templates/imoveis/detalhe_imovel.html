@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ imovel.titulo }} - Deise Santos Imóveis{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Galeria de Imagens -->
+    <div id="galeriaImovel" class="carousel slide mb-4" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for imagem in imovel.imagens.all %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <img src="{{ imagem.imagem.url }}" class="d-block w-100" alt="Imagem {{ forloop.counter }}" style="height: 500px; object-fit: cover;">
+                </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#galeriaImovel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#galeriaImovel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+        <div class="carousel-indicators">
+            {% for imagem in imovel.imagens.all %}
+                <button type="button" data-bs-target="#galeriaImovel" data-bs-slide-to="{{ forloop.counter0 }}" 
+                    {% if forloop.first %}class="active"{% endif %}></button>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Informações Principais -->
+        <div class="col-lg-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h1 class="card-title h2 mb-3">{{ imovel.titulo }}</h1>
+                    <div class="mb-3">
+                        <span class="badge bg-primary">{{ imovel.get_tipo_display }}</span>
+                        <span class="badge bg-secondary">{{ imovel.get_finalidade_display }}</span>
+                    </div>
+                    <h3 class="text-primary mb-4">R$ {{ imovel.preco|floatformat:2 }}</h3>
+                    
+                    <h4 class="mb-3">Localização</h4>
+                    <p>
+                        <i class="fas fa-map-marker-alt"></i>
+                        {{ imovel.endereco }}, {{ imovel.bairro }}, {{ imovel.cidade }}
+                    </p>
+
+                    <h4 class="mb-3">Descrição</h4>
+                    <p class="card-text">{{ imovel.descricao|linebreaks }}</p>
+                </div>
+            </div>
+
+            <!-- Características -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="mb-4">Características do Imóvel</h4>
+                    <div class="row g-3">
+                        <div class="col-6 col-md-4">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-ruler-combined fa-2x text-primary me-2"></i>
+                                <div>
+                                    <small class="text-muted d-block">Área</small>
+                                    <strong>{{ imovel.metragem }}m²</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-bed fa-2x text-primary me-2"></i>
+                                <div>
+                                    <small class="text-muted d-block">Quartos</small>
+                                    <strong>{{ imovel.quartos }}</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-bath fa-2x text-primary me-2"></i>
+                                <div>
+                                    <small class="text-muted d-block">Banheiros</small>
+                                    <strong>{{ imovel.banheiros }}</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-car fa-2x text-primary me-2"></i>
+                                <div>
+                                    <small class="text-muted d-block">Vagas</small>
+                                    <strong>{{ imovel.vagas }}</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-calendar-alt fa-2x text-primary me-2"></i>
+                                <div>
+                                    <small class="text-muted d-block">Ano</small>
+                                    <strong>{{ imovel.ano_fabricacao }}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <!-- Card de Contato -->
+            <div class="card mb-4 sticky-top" style="top: 2rem;">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">Interessado?</h4>
+                    <form action="{% url 'contato:enviar_mensagem' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="imovel_interesse" value="{{ imovel.titulo }}">
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Nome</label>
+                            <input type="text" name="nome" class="form-control" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">E-mail</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Telefone</label>
+                            <input type="tel" name="telefone" class="form-control" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Mensagem</label>
+                            <textarea name="mensagem" class="form-control" rows="4" required>Olá, tenho interesse no imóvel "{{ imovel.titulo }}".</textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary w-100">Enviar Mensagem</button>
+                    </form>
+
+                    <hr class="my-4">
+
+                    <div class="text-center">
+                        <p class="mb-2">Ou entre em contato diretamente:</p>
+                        <a href="tel:+5500000000000" class="btn btn-outline-primary mb-2 w-100">
+                            <i class="fas fa-phone me-2"></i> Ligar Agora
+                        </a>
+                        <a href="https://wa.me/5500000000000" target="_blank" class="btn btn-success w-100">
+                            <i class="fab fa-whatsapp me-2"></i> WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Máscara para o campo de telefone
+    document.querySelector('input[name="telefone"]').addEventListener('input', function (e) {
+        let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+        e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+    });
+</script>
+{% endblock %}
