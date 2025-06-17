@@ -1,0 +1,28 @@
+# Configurações do Django
+SECRET_KEY=django-insecure-sua-chave-secreta-aqui-mude-em-producao
+DEBUG=True
+
+# Configurações do Banco de Dados (opcional - já está usando SQLite)
+DATABASE_URL=sqlite:///db.sqlite3
+
+# Configurações de Email (para receber mensagens de contato)
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER=seu-email@gmail.com
+EMAIL_HOST_PASSWORD=sua-senha-de-app
+
+# Configurações de WhatsApp (para o botão flutuante)
+WHATSAPP_NUMBER=5511999999999
+
+# Configurações de Contato da Imobiliária
+IMOBILIARIA_TELEFONE=(51) XXXXX-XXXX
+IMOBILIARIA_EMAIL=contato@deisesantosimoveis.com.br
+IMOBILIARIA_ENDERECO=Endereço da Imobiliária
+
+import os
+
+# Configurações de contato
+IMOBILIARIA_TELEFONE = os.getenv('IMOBILIARIA_TELEFONE', '(XX) XXXXX-XXXX')
+IMOBILIARIA_EMAIL = os.getenv('IMOBILIARIA_EMAIL', 'contato@deisesantosimoveis.com.br')
+IMOBILIARIA_ENDERECO = os.getenv('IMOBILIARIA_ENDERECO', 'Endereço da Imobiliária')

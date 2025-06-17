@@ -4,6 +4,7 @@
 
 {% block content %}
 <!-- Banner Rotativo -->
+{% if imoveis_destaque %}
 <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
         {% for imovel in imoveis_destaque|slice:":3" %}
@@ -27,6 +28,16 @@
         <span class="carousel-control-next-icon"></span>
     </button>
 </div>
+{% else %}
+<!-- Hero Section quando não há imóveis -->
+<div class="hero-section">
+    <div class="container">
+        <h1>Bem-vindo à Deise Santos Imóveis</h1>
+        <p class="lead">Sua parceira na realização do sonho da casa própria</p>
+        <a href="{% url 'contato:contato' %}" class="btn btn-light btn-lg">Entre em Contato</a>
+    </div>
+</div>
+{% endif %}
 
 <!-- Seção Institucional -->
 <section class="py-5 bg-light">
@@ -75,6 +86,7 @@
 </section>
 
 <!-- Imóveis em Destaque -->
+{% if imoveis_destaque %}
 <section class="py-5">
     <div class="container">
         <h2 class="text-center mb-5">Imóveis em Destaque</h2>
@@ -108,4 +120,14 @@
         </div>
     </div>
 </section>
+{% else %}
+<!-- Seção quando não há imóveis -->
+<section class="py-5">
+    <div class="container text-center">
+        <h2 class="mb-4">Em breve, nossos imóveis estarão disponíveis!</h2>
+        <p class="lead mb-4">Estamos preparando nosso catálogo com as melhores opções para você.</p>
+        <a href="{% url 'contato:contato' %}" class="btn btn-primary btn-lg">Fale Conosco</a>
+    </div>
+</section>
+{% endif %}
 {% endblock %}
