@@ -1,6 +1,6 @@
-# Deise Santos Imóveis
+# IAGO Multimarcas - Revenda de Carros
 
-Sistema web para gerenciamento de imóveis desenvolvido com Django.
+Sistema web para revenda de carros desenvolvido com Django.
 
 ## Requisitos
 
@@ -13,7 +13,7 @@ Sistema web para gerenciamento de imóveis desenvolvido com Django.
 1. Clone o repositório:
 ```bash
 git clone <url-do-repositorio>
-cd deise_santos_imoveis
+cd revenda-carros
 ```
 
 2. Crie um ambiente virtual e ative-o:
@@ -53,7 +53,7 @@ O site estará disponível em `http://127.0.0.1:8000/`
 ## Estrutura do Projeto
 
 - `core/`: Configurações principais do projeto
-- `imoveis/`: App para gerenciamento de imóveis
+- `carros/`: App para gerenciamento de carros
 - `contato/`: App para formulário de contato
 - `templates/`: Templates HTML
 - `static/`: Arquivos estáticos (CSS, JS, imagens)
@@ -61,7 +61,12 @@ O site estará disponível em `http://127.0.0.1:8000/`
 
 ## Funcionalidades
 
-- Catálogo de imóveis
-- Detalhes do imóvel
-- Formulário de contato
-- Área administrativa
+- Catálogo de carros disponíveis para venda
+- Detalhes do veículo (marca, modelo, ano, cor, portas, combustível, valor, etc.)
+- Upload de fotos dos carros
+- Formulário de contato para interessados
+- Área administrativa para cadastro e edição de veículos
+
+---
+
+Desenvolvido para IAGO Multimarcas - Revenda de Carros

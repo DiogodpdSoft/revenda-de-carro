@@ -28,11 +28,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     # Apps locais
-    'imoveis.apps.ImoveisConfig',
     'contato.apps.ContatoConfig',
     # Apps de terceiros
     'django_cleanup.apps.CleanupConfig',
+    'carros',
 ]
 
 MIDDLEWARE = [

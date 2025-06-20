@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load static %}
+
+{% block title %}IAGO Multimarcas - Revenda de Carros - Estoque{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4">Nossos Carros</h2>
+    <div class="row g-4">
+        {% for carro in carros %}
+            <div class="col-md-4">
+                <div class="card h-100">
+                    {% if carro.foto %}
+                        <img src="{{ carro.foto.url }}" class="card-img-top" alt="{{ carro.marca }} {{ carro.modelo }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ carro.marca }} {{ carro.modelo }}</h5>
+                        <p class="card-text">
+                            <strong>Ano:</strong> {{ carro.ano }}<br>
+                            <strong>Quilometragem:</strong> {{ carro.quilometragem|intcomma }} km<br>
+                            <strong>Portas:</strong> {{ carro.numero_portas }}<br>
+                            <strong>Cor:</strong> {{ carro.cor }}<br>
+                            <strong>Combustível:</strong> {{ carro.combustivel }}
+                        </p>
+                        <h4 class="text-primary">R$ {{ carro.valor|floatformat:2 }}</h4>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <a href="{% url 'detalhe_carro' carro.id %}" class="btn btn-primary w-100">Ver Detalhes</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <div class="alert alert-info">
+                    Nenhum carro encontrado.
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %} 

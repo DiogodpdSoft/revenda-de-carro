@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}{{ carro.marca }} {{ carro.modelo }} - Detalhes{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    {% if carro.foto %}
+                        <img src="{{ carro.foto.url }}" class="img-fluid mb-4" alt="{{ carro.marca }} {{ carro.modelo }}">
+                    {% endif %}
+                    <h1 class="card-title h2 mb-3">{{ carro.marca }} {{ carro.modelo }}</h1>
+                    <h3 class="text-primary mb-4">R$ {{ carro.valor|floatformat:2 }}</h3>
+                    <h4 class="mb-3">Características</h4>
+                    <ul class="list-group list-group-flush mb-3">
+                        <li class="list-group-item"><strong>Ano:</strong> {{ carro.ano }}</li>
+                        <li class="list-group-item"><strong>Quilometragem:</strong> {{ carro.quilometragem|intcomma }} km</li>
+                        <li class="list-group-item"><strong>Portas:</strong> {{ carro.numero_portas }}</li>
+                        <li class="list-group-item"><strong>Cor:</strong> {{ carro.cor }}</li>
+                        <li class="list-group-item"><strong>Combustível:</strong> {{ carro.combustivel }}</li>
+                    </ul>
+                    <h4 class="mb-3">Descrição</h4>
+                    <p class="card-text">{{ carro.descricao|linebreaks }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card mb-4 sticky-top" style="top: 2rem;">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">Interessado?</h4>
+                    <form action="{% url 'contato:enviar_mensagem' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="carro_interesse" value="{{ carro.marca }} {{ carro.modelo }}">
+                        <div class="mb-3">
+                            <label class="form-label">Nome</label>
+                            <input type="text" name="nome" class="form-control" required placeholder="Digite seu nome">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">E-mail</label>
+                            <input type="email" name="email" class="form-control" required placeholder="Digite seu e-mail">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Telefone</label>
+                            <input type="tel" name="telefone" class="form-control" required placeholder="Digite seu telefone">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Mensagem</label>
+                            <textarea name="mensagem" class="form-control" rows="4" required placeholder="Digite sua mensagem">Olá, tenho interesse no carro "{{ carro.marca }} {{ carro.modelo }}".</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
