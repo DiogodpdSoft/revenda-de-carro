@@ -24,6 +24,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Exporta SECRET_KEY para ambiente
+        run: echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
+
       - name: Coletar arquivos estáticos
         run: python manage.py collectstatic --noinput
 
@@ -36,4 +39,4 @@ jobs:
           localDir: "staticfiles"
 
       - name: Definir SECRET_KEY no servidor
-        run: export SECRET_KEY='sua-chave-secreta-bem-grande-e-aleatoria'
+        run: export SECRET_KEY='j6u&3sb-_hjl+58c0q_l)9$v91p%2pp4hd&1jynbyi8zf95&$u'
