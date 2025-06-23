@@ -13,12 +13,15 @@ except:
     pass
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-sua-chave-secreta-aqui-mude-em-producao')
+SECRET_KEY = os.getenv('SECRET_KEY')
+if not SECRET_KEY:
+    raise Exception('A variável de ambiente SECRET_KEY não está definida!')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'True') == 'True'
+DEBUG = False  # Sempre False em produção
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+# Altere para o(s) domínio(s) do seu site em produção
+ALLOWED_HOSTS = ['diogodpd.com.br', 'www.diogodpd.com.br']
 
 # Application definition
 INSTALLED_APPS = [
