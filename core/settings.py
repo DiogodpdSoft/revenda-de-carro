@@ -15,7 +15,7 @@ except:
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('j6u&3sb-_hjl+58c0q_l)9$v91p%2pp4hd&1jynbyi8zf95&$u')
 if not SECRET_KEY:
-    raise Exception('A variável de ambiente SECRET_KEY não está definida!')
+    raise Exception('A variável de ambiente j6u&3sb-_hjl+58c0q_l)9$v91p%2pp4hd&1jynbyi8zf95&$u não está definida!')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False  # Sempre False em produção
