@@ -15,3 +15,20 @@ jobs:
         password: ${{ secrets.PASS }}
         localDir: "staticfiles"
         remoteDir: "public_html/static"  # <-- Adicionar esta linha
+        - name: Coletar arquivos estáticos
+        run: python manage.py collectstatic --noinput
+
+      - name: Lista arquivos após collectstatic
+        run: ls -l
+
+      - name: Garante que a pasta staticfiles existe
+        run: mkdir -p staticfiles
+
+      - name: Deploy via FTP para Locaweb
+        uses: locaweb/ftp-deploy@1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          user: ${{ secrets.USER }}
+          password: ${{ secrets.PASS }}
+          localDir: "staticfiles"
+          remoteDir: "public_html/static"
