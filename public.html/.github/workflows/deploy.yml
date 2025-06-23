@@ -9,6 +9,21 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+<<<<<<< HEAD
+    - name: Deploy via FTP para Locaweb
+      uses: locaweb/ftp-deploy@1.0.0
+      with:
+        host: ${{ secrets.HOST }}
+        user: ${{ secrets.USER }}
+        password: ${{ secrets.PASS }}
+        localDir: "staticfiles"
+        remoteDir: "public_html/static"  # <-- Adicionar esta linha
+<<<<<<< HEAD
+        - name: Coletar arquivos estáticos
+        run: python manage.py collectstatic --noinput
+=======
+>>>>>>> dab372e76dac77b72259be9d8b51a6296c155d91
+=======
     steps:
       - name: Checkout do código
         uses: actions/checkout@v3
@@ -43,3 +58,4 @@ jobs:
           password: ${{ secrets.PASS }}
           localDir: "staticfiles"
           remoteDir: "public_html/static"
+>>>>>>> baf1a41c57e8139e4dbebb7844928e2364ce8d9e
