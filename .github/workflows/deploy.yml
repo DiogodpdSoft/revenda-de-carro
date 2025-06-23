@@ -15,5 +15,8 @@ jobs:
         password: ${{ secrets.PASS }}
         localDir: "staticfiles"
         remoteDir: "public_html/static"  # <-- Adicionar esta linha
+<<<<<<< HEAD
         - name: Coletar arquivos estáticos
         run: python manage.py collectstatic --noinput
+=======
+>>>>>>> dab372e76dac77b72259be9d8b51a6296c155d91
