@@ -34,3 +34,6 @@ jobs:
           user: ${{ secrets.USER }}
           password: ${{ secrets.PASS }}
           localDir: "staticfiles"
+
+      - name: Definir SECRET_KEY no servidor
+        run: export SECRET_KEY='sua-chave-secreta-bem-grande-e-aleatoria'
